@@ -1,0 +1,23 @@
+<div v-show="salles.length" class="mb-4">
+  <h1 class="mb-4"><i class="fa fa-file-text-o"></i> Salles</h1>
+
+  <div class="form-group">
+    <input class="form-control" placeholder="Filter salles..." v-model="sallesFilter">
+  </div>
+
+  <transition-group
+    tag="div"
+    class="list-group"
+    :css="false"
+    @before-enter="handleBeforeEnter"
+    @enter="handleEnter">
+    <router-link v-if="filteredSalles.length"
+                 class="list-group-item"
+                 v-for="(salle, index) in filteredSalles"
+                 :key="index"
+                 :data-index="index"
+                 :to="{ name: 'salle', params: { id: salle.id }}">
+      #{{ index+1 }} {{ salle.libelle }} {{ salle.etage }} {{ salle.capacite }}
+    </router-link>
+  </transition-group>
+</div>

@@ -1,0 +1,24 @@
+<div v-show="seances.length" class="mb-4">
+  <h1 class="mb-4"><i class="fa fa-file-text-o"></i> Seances</h1>
+
+  <div class="form-group">
+    <input class="form-control" placeholder="Filter seances..." v-model="seancesFilter">
+  </div>
+
+  <transition-group
+    tag="div"
+    class="list-group"
+    :css="false"
+    @before-enter="handleBeforeEnter"
+    @enter="handleEnter">
+    <router-link v-if="filteredSeances.length"
+                 class="list-group-item"
+                 v-for="(seance, index) in filteredSeances"
+                 :key="index"
+                 :data-index="index"
+                 :to="{ name: 'seance', params: { id: seance.id }}">
+      #{{ index+1 }} {{ seance.libelle }} {{ seance.heureDebut }} {{ seance.heureFin }}  {{ seance.date }}
+    </router-link>
+    </router-link>
+  </transition-group>
+</div>

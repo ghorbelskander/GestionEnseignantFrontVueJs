@@ -1,0 +1,86 @@
+<transition
+  name="post-appear-animation"
+  enter-active-class="animated flipInX">
+  <div>
+  
+    <form name="editSalleForm" class="card card-block" @submit.prevent="handleSubmit" v-if="salle">
+
+      <transition
+        name="post-message-animation"
+        enter-active-class="animated flipInX"
+        leave-active-class="animated flipOutX">
+        <div v-if="message">
+          <div class="alert" :class="{'alert-success': message.type === 'success'}" role="alert">
+            {{message.text}}
+          </div>
+        </div>
+      </transition>
+
+      <transition
+        name="error-animation"
+        enter-active-class="animated flipInX"
+        leave-active-class="animated flipOutX">
+        <div v-if="errors.any()" v-for="error in errors.errors" class="alert alert-danger" role="alert">
+          <strong>Doh!</strong> {{error.msg}}
+        </div>
+      </transition>
+
+      <div class="form-group row" :class="{'has-danger': errors.has('libelle') }">
+        <label for="libelle" class="col-2 col-form-label">Libelle</label>
+        <div class="col-10">
+          <input id="libelle"
+                 name="libelle"
+                 type="text"
+                 class="form-control"
+                 data-vv-rules="required"
+                 data-vv-as="libelle salle"
+                 v-model="salle.libelle"
+                 v-validate>
+        </div>
+      </div>
+       <div class="form-group row" :class="{'has-danger': errors.has('etage') }">
+        <label for="etage" class="col-2 col-form-label">Etage</label>
+        <div class="col-10">
+          <input id="etage"
+                 name="etage"
+                 type="text"
+                 class="form-control"
+                 data-vv-rules="required"
+                 data-vv-as="etage salle"
+                 v-model="salle.etage"
+                 v-validate>
+        </div>
+      </div>
+      
+       <div class="form-group row" :class="{'has-danger': errors.has('capacite') }">
+        <label for="capacite" class="col-2 col-form-label">Capacite</label>
+        <div class="col-10">
+          <input id="capacite"
+                 name="capacite"
+                 type="text"
+                 class="form-control"
+                 data-vv-rules="required"
+                 data-vv-as="capacite salle"
+                 v-model="salle.capacite"
+                 v-validate>
+        </div>
+      </div>
+
+    
+
+      <div class="form-group row">
+        <div class="col-2"></div>
+        <div class="col-10">
+          <button type="submit" class="btn btn-primary" :disabled="errors.any() || !isDirty">
+            <i class="fa fa-floppy-o"></i> Save
+          </button>
+        </div>
+      </div>
+
+    </form>
+    <hr>
+    <router-link to="/salles">
+      <i class="fa fa-chevron-left"></i> Back to salles
+    </router-link>
+  </div>
+</transition>

@@ -1,0 +1,19 @@
+<transition
+  name="post-appear-animation"
+  enter-active-class="animated flipInX">
+  <div v-if="enseignant.nom">
+    <div class="card card-block">
+      <p class="card-text">{{ enseignant.nom }}</p>
+      <p class="card-text">{{ enseignant.prenom }}</p>
+      <p class="card-text">{{ enseignant.mail }}</p>
+      <p class="card-text">{{ enseignant.telephone }}</p>
+    </div>
+    <hr>
+    <router-link class="" to="/enseignants">
+      <i class="fa fa-chevron-left"></i> Back to enseignants
+    </router-link>
+    <router-link class="btn btn-outline-info float-right" :to="{ name: 'editEnseignant', params: { id: enseignant.id }}">
+      <i class="fa fa-pencil"></i> Edit
+    </router-link>
+  </div>
+</transition>

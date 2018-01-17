@@ -1,0 +1,19 @@
+<transition
+  name="post-appear-animation"
+  enter-active-class="animated flipInX">
+  <div v-if="seance.libelle">
+    <div class="card card-block">
+     <p class="card-text">{{ seance.libelle }}</p>
+      <p class="card-text">{{ seance.heureDebut }}</p>
+      <p class="card-text">{{ seance.heureFin }}</p>
+       <p class="card-text">{{ seance.date }}</p>
+    </div>
+    <hr>
+    <router-link class="" to="/seances">
+      <i class="fa fa-chevron-left"></i> Back to seances
+    </router-link>
+    <router-link class="btn btn-outline-info float-right" :to="{ name: 'editSeance', params: { id: seance.id }}">
+      <i class="fa fa-pencil"></i> Edit
+    </router-link>
+  </div>
+</transition>

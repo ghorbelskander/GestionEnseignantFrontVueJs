@@ -1,0 +1,23 @@
+<div v-show="enseignants.length" class="mb-4">
+  <h1 class="mb-4"><i class="fa fa-file-text-o"></i> Enseignants</h1>
+
+  <div class="form-group">
+    <input class="form-control" placeholder="Filter enseignants..." v-model="enseignantsFilter">
+  </div>
+
+  <transition-group
+    tag="div"
+    class="list-group"
+    :css="false"
+    @before-enter="handleBeforeEnter"
+    @enter="handleEnter">
+    <router-link v-if="filteredEnseignants.length"
+                 class="list-group-item"
+                 v-for="(enseignant, index) in filteredEnseignants"
+                 :key="index"
+                 :data-index="index"
+                 :to="{ name: 'enseignant', params: { id: enseignant.id }}">
+      #{{ index+1 }} {{ enseignant.id }} {{ enseignant.nom }} {{ enseignant.prenom}}  {{ enseignant.mail }}
+    </router-link>
+  </transition-group>
+</div>
